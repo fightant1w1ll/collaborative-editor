@@ -10,7 +10,7 @@ const FilesContainer = ({ children }: ContainerProps) => {
   const location = useLocation();
   const { userId } = useContext(AuthContext);
 
-  const [_, collectionId, documentName] = parseUrl(location.pathname);
+  const [, collectionId, documentName] = parseUrl(location.pathname);
 
   const [files, setFiles] = useState<FileDescription[]>(() => {
     if (collectionId && documentName) {
@@ -27,9 +27,9 @@ const FilesContainer = ({ children }: ContainerProps) => {
       method: 'GET',
     })
       .then(res => res.json())
-      .then(({ message, data }: any) => {
+      .then(({ message, data }) => {
         if (message === 'OK') {
-          const userFiles = data as Array<any>;
+          const userFiles = data;
 
           setFiles(mergeFiles(files, userFiles));
         }
